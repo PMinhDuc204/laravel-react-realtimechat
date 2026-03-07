@@ -14,6 +14,8 @@ export default function Home({ selectedConversation = null, messages = null }) {
     const [scrollFromBottom, setScrollFromBottom] = useState(0);
     const loadMoreIntersect = useRef(null);
     const messagesCtrRef = useRef(null);
+    const [showAttachmentPreview, setShowAttachmentPreview] = useState(false);
+    const [previewAttachment, setPreviewAttachment] = useState({});
     const { on } = useEventBus();
 
     const messageCreated = (message) => {
@@ -59,7 +61,15 @@ export default function Home({ selectedConversation = null, messages = null }) {
                     return [...data.data.reverse(), ...prevMessages];
                 });
             });
-    }, [localMessages]);
+    }, [localMessages, noMoreMessages]);
+
+    const onAttachmentClick = (attachment, ind) => {
+        setPreviewAttachment({
+            attachment,
+            ind,
+        });
+        setShowAttachmentPreview(true);
+    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -157,8 +167,16 @@ export default function Home({ selectedConversation = null, messages = null }) {
                     />
                 </>
             )}
+            {previewAttachment.attachment && (
+                <AttachmentPreviewModal
+                    attachments={previewAttachment.attachments}
+                    index={previewAttachment.ind}
+                    show={showAttachmentPreview}
+                    onClose={() => setShowAttachmentPreview(false)}
+                />
+            )}
         </>
-    )
+    );
 }
 
 Home.layout = (page) => {

@@ -30,6 +30,7 @@
         "@heroicons/react": "^2.2.0",
         "emoji-picker-react": "^4.16.1",
         "react": "^19.2.1",
+        "react-audio-player": "^0.17.0",
         "react-dom": "^19.2.1",
         "react-markdown": "^10.1.0",
         "uuid": "^13.0.0"
