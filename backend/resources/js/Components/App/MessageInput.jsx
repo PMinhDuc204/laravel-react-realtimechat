@@ -34,7 +34,7 @@ const MessageInput = ({ conversation = null }) => {
         if (messageSending) {
             return;
         }
-        if (newMessage.trim() === "") {
+        if (newMessage.trim() === "" && chosenFiles.length === 0) {
             setInputErrorMessage("Please provide a message or upload attachment.");
 
             setTimeout(() => {
@@ -67,7 +67,7 @@ const MessageInput = ({ conversation = null }) => {
         }).then((response) => {
             setNewMessage("");
             setMessageSending(false);
-            setUploadProgress(progress);
+            setUploadProgress(0);
             setChosenFiles([]);
         }).catch((error) => {
             setMessageSending(false);

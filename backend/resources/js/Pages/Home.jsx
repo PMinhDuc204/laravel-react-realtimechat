@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MessageItem from '@/Components/App/MessageItem';
 import { useEventBus } from '@/EventBus';
 import axios from 'axios';
+import AttachmentPreviewModal from '@/Components/App/AttachmentPreviewModal';
 
 export default function Home({ selectedConversation = null, messages = null }) {
     const [localMessages, setLocalMessages] = useState([]);
@@ -63,9 +64,9 @@ export default function Home({ selectedConversation = null, messages = null }) {
             });
     }, [localMessages, noMoreMessages]);
 
-    const onAttachmentClick = (attachment, ind) => {
+    const onAttachmentClick = (attachments, ind) => {
         setPreviewAttachment({
-            attachment,
+            attachments,
             ind,
         });
         setShowAttachmentPreview(true);
@@ -157,6 +158,7 @@ export default function Home({ selectedConversation = null, messages = null }) {
                                     <MessageItem
                                         key={message.id}
                                         message={message}
+                                        onAttachmentClick={onAttachmentClick}
                                     />
                                 ))}
                             </div>
@@ -167,7 +169,7 @@ export default function Home({ selectedConversation = null, messages = null }) {
                     />
                 </>
             )}
-            {previewAttachment.attachment && (
+            {previewAttachment.attachments && (
                 <AttachmentPreviewModal
                     attachments={previewAttachment.attachments}
                     index={previewAttachment.ind}

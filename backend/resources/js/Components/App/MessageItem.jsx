@@ -4,7 +4,7 @@ import { usePage } from "@inertiajs/react"
 import ReactMarkdown from "react-markdown"
 import MessageAttachments from "./MessageAttachments"
 
-const MessageItem = ({ message, attachmentClick }) => {
+const MessageItem = ({ message, onAttachmentClick }) => {
     const currentUser = usePage().props.auth.user;
   return (
     <div className={
@@ -35,7 +35,7 @@ const MessageItem = ({ message, attachmentClick }) => {
                 </div>
                 <MessageAttachments
                     attachments={message.attachments}
-                    attachmentsClick={attachmentClick}
+                    attachmentsClick={onAttachmentClick}
                 />
             </div>
         </div>

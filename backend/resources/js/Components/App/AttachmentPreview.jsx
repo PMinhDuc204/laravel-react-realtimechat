@@ -1,7 +1,7 @@
 import { formatBytes, isPDF, isPreviewable } from '@/helpers';
 import { PaperClipIcon } from '@heroicons/react/24/solid';
 
-const AttachmentPreview = () => {
+const AttachmentPreview = ({ file }) => {
   return (
     <div className='w-full flex items-center gap-2 py-2 px-3 rounded-md bg-slate-800'>
         <div>
