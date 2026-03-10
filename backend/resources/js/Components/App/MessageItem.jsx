@@ -3,6 +3,7 @@ import UserAvatar from "./UserAvatar"
 import { usePage } from "@inertiajs/react"
 import ReactMarkdown from "react-markdown"
 import MessageAttachments from "./MessageAttachments"
+import MessageOptionsDropdown from "./MessageOptionsDropdown"
 
 const MessageItem = ({ message, onAttachmentClick }) => {
     const currentUser = usePage().props.auth.user;
@@ -29,6 +30,9 @@ const MessageItem = ({ message, onAttachmentClick }) => {
                     : "")
             }
         >
+            {message.sender_id == currentUser.id && (
+                <MessageOptionsDropdown message={message} />
+            )}
             <div className="chat-message">
                 <div className="chat-message-content">
                     <ReactMarkdown>{message.content}</ReactMarkdown>
