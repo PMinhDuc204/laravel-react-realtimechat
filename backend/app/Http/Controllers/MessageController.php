@@ -131,12 +131,12 @@ class MessageController extends Controller
         }
 
         $message->delete();
-
+        
         if ($group) {
             $group = Group::find($group->id);
             $lastMessage = $group->lastMessage;
         } else if ($conversation) {
-            $conversation = Conversation::find($group->id);
+            $conversation = Conversation::find($conversation->id);
             $lastMessage = $conversation->lastMessage;
         }
         return response()->json(['message' => $lastMessage ? new MessageResource($lastMessage) : null]);

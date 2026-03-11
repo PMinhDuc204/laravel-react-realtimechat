@@ -5,7 +5,9 @@ import axios from 'axios';
 import { useEventBus } from '@/EventBus';
 
 function MessageOptionsDropdown({ message }) {
+
   const { emit } = useEventBus();
+
   const onMessageDelete = () => {
     console.log("Delete message");
     axios.delete(route("message.destroy", message.id))
