@@ -50,6 +50,17 @@ export default function AuthenticatedLayout({ header, children }) {
                             }`,
                     });
                 });
+
+            if (conversation.is_group) {
+                echo.private(`group.deleted.${conversation.id}`)
+                    .listen("GroupDeleted", (e) => {
+                        console.log("Group deleted", e);
+                        emit("group.deleted", { id: e.id, name: e.name});
+                    })
+                    .error((e) => {
+                        console.error(e);
+                    });
+            }
         });
         return () => {
             conversations.forEach((conversation) => {
@@ -62,6 +73,10 @@ export default function AuthenticatedLayout({ header, children }) {
                     .sort((a, b) => a - b).join('_')}`;
                 }
                 echo.leave(channel);
+
+                if (conversation.is_group) {
+                    echo.leave(`group.deleted.${conversation.id}`);
+                }
             });
         };
     }, [conversations]);

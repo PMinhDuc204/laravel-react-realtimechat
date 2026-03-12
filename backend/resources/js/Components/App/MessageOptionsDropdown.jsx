@@ -9,7 +9,6 @@ function MessageOptionsDropdown({ message }) {
   const { emit } = useEventBus();
 
   const onMessageDelete = () => {
-    console.log("Delete message");
     axios.delete(route("message.destroy", message.id))
          .then((res) => {
             emit("message.deleted", { message, prevMessage: res.data.message });
