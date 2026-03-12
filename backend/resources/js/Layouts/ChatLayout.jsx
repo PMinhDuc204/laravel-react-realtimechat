@@ -78,10 +78,12 @@ const ChatLayout = ({ children }) => {
                 return oldConversations.filter((con) => con.id != id);
             });
 
-            emit("toast.show", `Group ${name} was deleted`);
+            emit("toast.show", `Group "${name}" was deleted`);
+
+            console.log(selectedConversation);
 
             if (
-                selectedConversation &&
+                !selectedConversation ||
                 selectedConversation.is_group &&
                 selectedConversation.id == id
             ) {

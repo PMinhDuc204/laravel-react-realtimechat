@@ -22,17 +22,10 @@ class UpdateGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','max:255'],
             'description' => ['nullable','string'],
             'user_ids' => ['nullable','array'],
             'user_ids.*' => ['integer','exists:users,id']
         ];
     }
 
-    public function validated($key = null, $default = null)
-    {
-        $validated = parent::validated($key, $default);
-        $validated['owner_id'] = $this->user()->id;
-        return $validated;
-    }
 }

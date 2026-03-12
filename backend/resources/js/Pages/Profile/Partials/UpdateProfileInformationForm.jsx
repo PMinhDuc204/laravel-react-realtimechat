@@ -12,16 +12,18 @@ export default function UpdateProfileInformation({
 }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
             name: user.name,
             email: user.email,
+            avatar: null,
+            _method: 'PATCH',
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        post(route('profile.update'));
     };
 
     return (
@@ -38,7 +40,19 @@ export default function UpdateProfileInformation({
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="avatar" value="Profile Picture" />
+                    <input
+                        id="avatar"
+                        type="file"
+                        className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                        value={data.avatar}
+                        onChange={(e) => setData('avatar', e.target.files[0])}
+                    />
+                    <p className="mt-1 text-gray-400">
+                        Please upload a profile picture. Ex: 512px&times;512px.
+                    </p>
+
+                    
 
                     <TextInput
                         id="name"

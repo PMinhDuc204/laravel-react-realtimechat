@@ -13,8 +13,7 @@ export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const page = usePage();
     const conversations = page.props.conversations || [];
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
+    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const { emit } = useEventBus();
 
     useEffect(() => {
@@ -54,7 +53,6 @@ export default function AuthenticatedLayout({ header, children }) {
             if (conversation.is_group) {
                 echo.private(`group.deleted.${conversation.id}`)
                     .listen("GroupDeleted", (e) => {
-                        console.log("Group deleted", e);
                         emit("group.deleted", { id: e.id, name: e.name});
                     })
                     .error((e) => {
