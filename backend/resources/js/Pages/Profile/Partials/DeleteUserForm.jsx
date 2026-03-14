@@ -77,6 +77,13 @@ export default function DeleteUserForm({ className = '' }) {
                         your account.
                     </p>
 
+                    <input
+                        type="text"
+                        name="username"
+                        autoComplete="username"
+                        className="hidden"
+                    />
+
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="password"

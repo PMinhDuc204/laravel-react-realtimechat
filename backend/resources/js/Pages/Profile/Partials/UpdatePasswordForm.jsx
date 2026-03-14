@@ -58,6 +58,12 @@ export default function UpdatePasswordForm({ className = '' }) {
             </header>
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
+                <input
+                    type="text"
+                    name="username"
+                    autoComplete="username"
+                    className="hidden"
+                />
                 <div>
                     <InputLabel
                         htmlFor="current_password"

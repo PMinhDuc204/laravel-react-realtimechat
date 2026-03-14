@@ -1,3 +1,4 @@
+import UserAvatar from '@/Components/App/UserAvatar';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -39,21 +40,23 @@ export default function UpdateProfileInformation({
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
+                <UserAvatar user={user} profile={true} />
                 <div>
                     <InputLabel htmlFor="avatar" value="Profile Picture" />
                     <input
                         id="avatar"
                         type="file"
                         className="file-input file-input-bordered file-input-primary w-full max-w-xs"
-                        value={data.avatar}
                         onChange={(e) => setData('avatar', e.target.files[0])}
                     />
                     <p className="mt-1 text-gray-400">
                         Please upload a profile picture. Ex: 512px&times;512px.
                     </p>
+                    <InputError className="mt-2" message={errors.avatar} />
+                </div>
 
-                    
-
+                <div>
+                    <InputLabel htmlFor="name" value="Name" />
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
