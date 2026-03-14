@@ -51,7 +51,7 @@ const ConversationItem = ({
         {conversation.is_group && <GroupAvatar />}
         <div 
             className={`flex-1 text-xs max-w-full overflow-hidden` +
-                (conversation.is_user && conversation.blocked_at ? "opacity-50" : "")
+                (conversation.is_user && conversation.blocked_at ? " opacity-50" : "")
             }
         >
             <div className="flex gap-1 justify-between items-center">

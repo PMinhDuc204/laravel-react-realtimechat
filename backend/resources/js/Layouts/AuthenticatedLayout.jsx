@@ -8,12 +8,16 @@ import echo from '@/echo';
 import { useEventBus } from '@/EventBus';
 import Toast from '@/Components/App/Toast';
 import NewMessageNotification from '@/Components/App/NewMessageNotification';
+import PrimaryButton from '@/Components/PrimaryButton';
+import { UserPlusIcon } from '@heroicons/react/24/solid';
+import NewUserModal from '@/Components/App/NewUserModal';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const page = usePage();
     const conversations = page.props.conversations || [];
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const [showUserModal, setShowUserModal] = useState(false);
     const { emit } = useEventBus();
 
     useEffect(() => {
@@ -103,7 +107,13 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                                <div className="relative ms-3">
+                                <div className="flex relative ms-3">
+                                    {user.is_admin && (
+                                        <PrimaryButton onClick={(ev) => setShowUserModal(true)}>
+                                            <UserPlusIcon className="h-5 w-5 mr-2" />
+                                            Add New User
+                                        </PrimaryButton>
+                                    )}
                                     <Dropdown>
                                         <Dropdown.Trigger>
                                             <span className="inline-flex rounded-md">
@@ -242,6 +252,7 @@ export default function AuthenticatedLayout({ header, children }) {
             </div>
             <Toast />
             <NewMessageNotification />
+            <NewUserModal show={showUserModal} onClose={(ev) => setShowUserModal(false)} />
         </>
     );
 }
